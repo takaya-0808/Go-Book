@@ -11,3 +11,4 @@ RUN go get github.com/go-xorm/xorm
 RUN go get go.uber.org/zap
 
 COPY go.mod .
+COPY go.sum .
