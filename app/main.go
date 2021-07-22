@@ -9,17 +9,18 @@ import (
 )
 
 func main() {
-	service.DBConnect()
+	db := service.DBConnect()
 	router := gin.Default()
 	// router.Use(middleware.RecordUaAndTime)
+	bookController := controller.NewBookController(*db)
 	bookEngin := router.Group("/book")
 	{
 		v1 := bookEngin.Group("/api/v1")
 		{
-			v1.POST("/add", controller.BookAdd)
-			v1.GET("/list", controller.BookList)
-			v1.PUT("/update", controller.BookEdit)
-			v1.DELETE("/delete/:id", controller.BookDelete)
+			v1.POST("/add", bookController.BookAdd)
+			v1.GET("/list", bookController.BookList)
+			v1.PUT("/update", bookController.BookEdit)
+			v1.DELETE("/delete/:id", bookController.BookDelete)
 		}
 	}
 	router.Run(":8020")
