@@ -50,38 +50,26 @@ func (bs *BookService) GetBookList() []model.Book {
 
 func (bs *BookService) UpdateBook(book *model.Book) error {
 
-	bookUpdate, err := bs.Conn.Prepare("update books set title=? and context=? where id=?")
-	if err != nil {
-		panic(err.Error())
-	}
-	defer bookUpdate.Close()
-
-	result, err := bookUpdate.Exec(&book.Title, &book.Content, &book.Id)
+	bookUpdate, err := bs.Conn.Exec("update books set title=? and content=? where id=?", &book.Title, &book.Content, &book.Id)
 	if err != nil {
 		panic(err.Error())
 	}
 
-	rowsAffect, err := result.RowsAffected()
+	rowsAffect, err := bookUpdate.RowsAffected()
 	if err != nil {
 		panic(err.Error())
 	}
-	log.Panicln(rowsAffect)
+	log.Println(rowsAffect)
 	return err
 }
 
 func (bs *BookService) DeleteBook(id int) error {
-	bookDelete, err := bs.Conn.Prepare("delete from books where id=?")
-	if err != nil {
-		panic(err.Error())
-	}
-	defer bookDelete.Close()
-
-	result, err := bookDelete.Exec(id)
+	bookDelete, err := bs.Conn.Exec("delete from books where id=?", id)
 	if err != nil {
 		panic(err.Error())
 	}
 
-	rowsAffect, err := result.RowsAffected()
+	rowsAffect, err := bookDelete.RowsAffected()
 	if err != nil {
 		panic(err.Error())
 	}
