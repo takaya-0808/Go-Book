@@ -13,9 +13,7 @@ type BookService struct {
 
 func (bs *BookService) SetBook(book *model.Book) (id int, err error) {
 
-	result, err := bs.Conn.Exec(
-		"Insert into books (title, content) values (?, ?)", book.Title, book.Content,
-	)
+	result, err := bs.Conn.Exec("Insert into books (title, content) values (?, ?)", book.Title, book.Content)
 
 	if err != nil {
 		panic(err.Error())
