@@ -58,7 +58,7 @@ func (bc *BookController) BookEdit(c *gin.Context) {
 }
 
 func (bc *BookController) BookDelete(c *gin.Context) {
-	id := c.PostForm("id")
+	id := c.Param("id")
 	intID, err := strconv.Atoi(id)
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"message": "Bad Request"})
