@@ -21,6 +21,7 @@ func main() {
 			v1.GET("/list", bookController.BookList)
 			v1.PUT("/update", bookController.BookEdit)
 			v1.DELETE("/delete/:id", bookController.BookDelete)
+			v1.GET("/list/:id", bookController.BookSearch)
 		}
 	}
 	router.Run(":8020")
