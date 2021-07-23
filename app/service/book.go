@@ -74,3 +74,21 @@ func (bs *BookService) DeleteBook(id int) error {
 	log.Println(rowsAffect)
 	return err
 }
+
+func (bs *BookService) FindByID(id int) (book model.Book, err error) {
+
+	rows, err := bs.Conn.Query("select id, title, content from books where id = ?", id)
+	defer rows.Close()
+	if err != nil {
+		return
+	}
+	rows.Next()
+	var books model.Book
+	if err = rows.Scan(&books.Id, &books.Title, &books.Content); err != nil {
+		return
+	}
+	book.Id = books.Id
+	book.Title = books.Title
+	book.Content = books.Content
+	return
+}
