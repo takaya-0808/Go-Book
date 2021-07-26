@@ -3,6 +3,7 @@ package controller
 import (
 	"Go-Book/app/model"
 	"Go-Book/app/service"
+	"log"
 	"net/http"
 	"strconv"
 
@@ -49,6 +50,8 @@ func (bc *BookController) BookList(c *gin.Context) {
 func (bc *BookController) BookEdit(c *gin.Context) {
 	book := model.Book{}
 	c.Bind(&book)
+	log.Print(book.Title)
+	log.Print(book.Content)
 	err := bc.bookService.UpdateBook(&book)
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"message": "Bad Request"})
