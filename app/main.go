@@ -17,11 +17,11 @@ func main() {
 	{
 		v1 := bookEngin.Group("/api/v1")
 		{
-			v1.POST("/add", bookController.BookAdd)
-			v1.GET("/list", bookController.BookList)
-			v1.PUT("/update", bookController.BookEdit)
-			v1.DELETE("/delete/:id", bookController.BookDelete)
-			v1.GET("/list/:id", bookController.BookSearch)
+			v1.POST("/", bookController.BookAdd)
+			v1.GET("/", bookController.BookList)
+			v1.PUT("/", bookController.BookEdit)
+			v1.DELETE("/:id", bookController.BookDelete)
+			v1.GET("/:id", bookController.BookSearch)
 		}
 	}
 	router.Run(":8020")
