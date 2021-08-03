@@ -11,7 +11,7 @@ import (
 )
 
 type BookController struct {
-	bookService service.BookServices
+	bookService service.BookService
 }
 
 func NewBookController(sql service.SqlHandler) *BookController {
