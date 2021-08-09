@@ -48,7 +48,8 @@ func (bs *BookService) GetBookList() []model.Book {
 
 func (bs *BookService) UpdateBook(book *model.Book) error {
 
-	bookUpdate, err := bs.Conn.Exec("update books set title=? and content=? where id=?", &book.Title, &book.Content, &book.Id)
+	log.Print(book.Content)
+	bookUpdate, err := bs.Conn.Exec("update books set title=?, content=? where id=?", &book.Title, &book.Content, &book.Id)
 	if err != nil {
 		panic(err.Error())
 	}
