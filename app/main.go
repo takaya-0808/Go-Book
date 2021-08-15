@@ -11,7 +11,6 @@ import (
 func main() {
 	db := service.DBConnect()
 	router := gin.Default()
-
 	// router.Use(middleware.RecordUaAndTime)
 	bookController := controller.NewBookController(*db)
 	bookEngin := router.Group("/book")
