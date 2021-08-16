@@ -5,6 +5,7 @@ services:
       context: .
       dockerfile: Dockerfile
     command: /bin/sh -c "go run ./app/main.go"
+    # command: /bin/sh -c "go test ./app/..."
     stdin_open: true
     tty: true
     volumes:
